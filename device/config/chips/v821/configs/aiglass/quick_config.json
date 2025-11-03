@@ -1,0 +1,782 @@
+/*
+*--Instructions--
+* name_of_configuare : {
+*	"sysconfig" : {}, ==> sys_config.fex
+*	"board.dts" : {}, ==> board.dts
+*	"bootpkg" : {}, ==>boot_package.cfg
+*	"env" : {}, ==> env.cfg
+*   "uboot-board.dts" : {}, ==>uboot-board.dts
+*   "partition" ==> sys_partition.fex
+*   "kernel" : {}, ==>linux-5.4-ansc/bsp_defconfig
+*	"openwrt" : {}, ==>openwrt/target/xxx/defconfig
+*},
+*/
+{
+	"use_common_conifg": true,
+	"quick_config_include": [
+		"fastboot_common.json"
+	],
+	/*****************************one_gc1084_sensor************************************/
+	"one_gc1084_sensor": {
+		"desc": "set one camare of gc1084 online for this board",
+		"board.dts": {
+			"set_property": {
+				//s0vencfg0
+				"s0vencfg0": {
+					"status": "\"okay\"",
+					"res_w": "<1280>",
+					"res_h": "<720>",
+					"bit_rate": "<1024>",
+					"jpg_w": "<1280>",
+					"jpg_h": "<720>"
+				},
+				//s1vencfg0
+				"s1vencfg0": {
+					"status": "\"disabled\""
+				},
+				//s2vencfg0
+				"s2vencfg0": {
+					"status": "\"disabled\""
+				},
+				//csi
+				"csi1": {
+					"pinctrl-0": "<&ncsi_bt656_pins_a>",
+					"pinctrl-1": "<&ncsi_bt656_pins_b>",
+					"status": "\"disabled\""
+				},
+				//tdm
+				"tdm0": {
+					"work_mode": "<0x0>"
+				},
+				//isp
+				"isp00": {
+					"work_mode": "<0x0>"
+				},
+				"isp01": {
+					"status": "\"disabled\""
+				},
+				"isp10": {
+					"status": "\"disabled\""
+				},
+				//scaler
+				"scaler00": {
+					"work_mode": "<0x0>"
+				},
+				"scaler01": {
+					"status": "\"disabled\""
+				},
+				"scaler10": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"scaler11": {
+					"status": "\"disabled\""
+				},
+				//set sensor name and addr
+				"sensor0": {
+					"sensor0_mname": "\"gc1084_mipi\"",
+					"sensor0_twi_addr": "<0x6e>",
+					"status": "\"okay\""
+				},
+				"sensor1": {
+					"status": "\"disabled\""
+				},
+				//set /dev/video0/4
+				"vinc00": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"vinc01": {
+					"vinc1_rear_sensor_sel": "<0>",
+					"vinc1_front_sensor_sel": "<0>",
+					"status": "\"disabled\""
+				},
+				"vinc10": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"vinc11": {
+					"vinc5_rear_sensor_sel": "<0>",
+					"vinc5_front_sensor_sel": "<0>",
+					"status": "\"disabled\""
+				}
+			}
+		},
+		// enable sensor complile
+		"kernel": [
+			"# CONFIG_SUPPORT_ISP_TDM is not set",
+			"CONFIG_SENSOR_GC1084_MIPI=y",
+			"# CONFIG_SENSOR_GC2083_MIPI is not set"
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind/sensor0": {
+				"sensor0_mname": "\"gc1084_mipi\""
+			},
+			"vind/vinc0": {
+				"vinc0_mipi_num": "1"
+			},
+			"vind/vinc4": {
+				"vinc4_mipi_num": "1"
+			}
+		},
+		// rtos configs
+		"rtos": [
+			"# CONFIG_SENSOR_GC2083_MIPI is not set",
+			"CONFIG_SENSOR_GC1084_MIPI=y"
+		]
+	}, //end of one_gc1084_sensor
+	/*****************************one_gc2083_sensor************************************/
+	"one_gc2083_sensor": {
+		"desc": "set one camare of gc2083 online for this board",
+		"board.dts": {
+			"set_property": {
+				//s0vencfg0
+				"s0vencfg0": {
+					"status": "\"okay\"",
+					"res_w": "<1920>",
+					"res_h": "<1080>",
+					"bit_rate": "<1024>",
+					"jpg_w": "<1920>",
+					"jpg_h": "<1080>"
+				},
+				//s1vencfg0
+				"s1vencfg0": {
+					"status": "\"disabled\""
+				},
+				//s2vencfg0
+				"s2vencfg0": {
+					"status": "\"disabled\""
+				},
+				//csi
+				"csi1": {
+					"pinctrl-0": "<&ncsi_bt656_pins_a>",
+					"pinctrl-1": "<&ncsi_bt656_pins_b>",
+					"status": "\"disabled\""
+				},
+				//tdm
+				"tdm0": {
+					"work_mode": "<0x0>"
+				},
+				//isp
+				"isp00": {
+					"work_mode": "<0x0>"
+				},
+				"isp01": {
+					"status": "\"disabled\""
+				},
+				"isp10": {
+					"status": "\"disabled\""
+				},
+				//scaler
+				"scaler00": {
+					"work_mode": "<0x0>"
+				},
+				"scaler01": {
+					"status": "\"disabled\""
+				},
+				"scaler10": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"scaler11": {
+					"status": "\"disabled\""
+				},
+				//set sensor name and addr
+				"sensor0": {
+					"sensor0_mname": "\"gc2083_mipi\"",
+					"sensor0_twi_addr": "<0x6e>",
+					"status": "\"okay\""
+				},
+				"sensor1": {
+					"status": "\"disabled\""
+				},
+				//set /dev/video0/4
+				"vinc00": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"vinc01": {
+					"vinc1_rear_sensor_sel": "<0>",
+					"vinc1_front_sensor_sel": "<0>",
+					"status": "\"disabled\""
+				},
+				"vinc10": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"vinc11": {
+					"vinc5_rear_sensor_sel": "<0>",
+					"vinc5_front_sensor_sel": "<0>",
+					"status": "\"disabled\""
+				}
+			}
+		},
+		// enable sensor complile
+		"kernel": [
+			"# CONFIG_SUPPORT_ISP_TDM is not set",
+			"CONFIG_SENSOR_GC2083_MIPI=y",
+			"# CONFIG_SENSOR_GC2083_ONE_LANE_MIPI is not set",
+			"# CONFIG_SENSOR_GC1084_MIPI is not set"
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind/sensor0": {
+				"sensor0_mname": "\"gc2083_mipi\""
+			},
+			"vind/vinc0": {
+				"vinc0_mipi_num": "2"
+			},
+			"vind/vinc4": {
+				"vinc4_mipi_num": "2"
+			}
+		},
+		// rtos configs
+		"rtos": [
+			"# CONFIG_SENSOR_GC1084_MIPI is not set",
+			"# CONFIG_SENSOR_GC2083_MIPI_USE_1LANE is not set",
+			"CONFIG_SENSOR_GC2083_MIPI=y"
+		]
+	}, //end of one_gc2083_sensor
+	/*****************************one_gc1084_sensor(2in1)************************************/
+	"one_gc1084_sensor_(2in1)": {
+		"desc": "Set one camare of gc1084 online for this board (2in1 mode)",
+		"board.dts": {
+			"set_property": {
+				"rv_ddr_reserved": {
+					"reg": "<0x0 0x81000000 0x0 0x440000>"
+				},
+				"rv_vdev0buffer": {
+					"reg": "<0x0 0x81440000 0x0 0x40000>"
+				},
+				"rv_vdev0vring0": {
+					"reg": "<0x0 0x81480000 0x0 0x2000>"
+				},
+				"e907_mem_fw": {
+					"reg": "<0x0 0x81484000 0x0 0x0025B000>"
+				},
+				"e907_share_irq_table": {
+					"reg": "<0x0 0x816EE000 0x0 0x2000>"
+				},
+				"e907_rpbuf_reserved": {
+					"reg": "<0x0 0x816F0000 0x0 0x40000>"
+				},
+				"isp_dram_reserved": {
+					"reg": "<0x0 0x81730000 0x0 0x008d0000>"
+				},
+				"e907_rproc": {
+					"fw-partition-sectors": "<4864>"
+				},
+				"tdm0": {
+					"work_mode": "<0x1>"
+				},
+				"isp00": {
+					"work_mode": "<0x1>"
+				},
+				"isp01": {
+					"status": "\"okay\"",
+					"rpbuf": "<&rpbuf_controller0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"scaler00": {
+					"work_mode": "<0x1>"
+				},
+				"scaler01": {
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"status": "\"okay\""
+				},
+				"scaler10": {
+					"work_mode": "<0x1>"
+				},
+				"scaler11": {
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"status": "\"okay\""
+				},
+				"vinc00": {
+					"work_mode": "<0x1>"
+				},
+				"vinc01": {
+					"vinc1_csi_sel": "<0>",
+					"vinc1_mipi_sel": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"okay\""
+				},
+				"vinc10": {
+					"work_mode": "<0x1>"
+				},
+				"vinc11": {
+					"vinc5_csi_sel": "<0>",
+					"vinc5_mipi_sel": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"okay\""
+				}
+			}
+		},
+		"kernel": [
+			"CONFIG_SUPPORT_ISP_TDM=y",
+			"CONFIG_VIN_SENSOR_RESERVE_ADDR=0x81FFE000"
+		],
+		"partition_nor": [
+			{
+				"name": "riscv0",
+				"size": "4480"
+			}
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind/vinc0": {
+				"vinc0_tdm_rx_sel": "0",
+				"vinc0_width": "320",
+				"vinc0_height": "240",
+				"vinc0_merge_width": "1280",
+				"vinc0_merge_height": "720",
+				"vinc0_work_mode": "1"
+			},
+			"vind/vinc1": {
+				"vinc1_used": "1",
+				"vinc1_isp_sel": "1",
+				"vinc1_tdm_rx_sel": "1",
+				"vinc1_width": "320",
+				"vinc1_height": "240",
+				"vinc1_merge_width": "1280",
+				"vinc1_merge_height": "720",
+				"vinc1_use_sensor_list": "0",
+				"vinc1_mipi_num": "1"
+			}
+		},
+		// rtos configs
+		"rtos": [
+			"CONFIG_ARCH_MEM_LENGTH=0x440000",
+			"CONFIG_ISP_NUMBER=2",
+			"CONFIG_TDM_RX_BUF_NUM=1",
+			"CONFIG_VIN_WAIT_AMP_INIT_SEM_TIMEOUT=4000",
+			"CONFIG_ISP_MEMRESERVE_ADDR=0x81730000",
+			"CONFIG_ISP_MEMRESERVE_LEN=0x8d0000",
+			"CONFIG_RTOS_FW_RESERVED_MEM_ADDR=0x81484000"
+		]
+	}, //end of one_gc1084_sensor
+	/*****************************one_gc05a2_sensor(2in1)************************************/
+	"one_gc05a2_sensor_(2in1)": {
+		"desc": "Set one camare of gc05a2 offline for this board (2in1 mode)",
+		"board.dts": {
+			"set_property": {
+				"rv_ddr_reserved": {
+					"reg": "<0x0 0x81000000 0x0 0x440000>"
+				},
+				"rv_vdev0buffer": {
+					"reg": "<0x0 0x81440000 0x0 0x40000>"
+				},
+				"rv_vdev0vring0": {
+					"reg": "<0x0 0x81480000 0x0 0x2000>"
+				},
+				"e907_mem_fw": {
+					"reg": "<0x0 0x81484000 0x0 0x0025B000>"
+				},
+				"e907_share_irq_table": {
+					"reg": "<0x0 0x816EE000 0x0 0x2000>"
+				},
+				"e907_rpbuf_reserved": {
+					"reg": "<0x0 0x816F0000 0x0 0x40000>"
+				},
+				"isp_dram_reserved": {
+					"reg": "<0x0 0x81730000 0x0 0x008d0000>"
+				},
+				"e907_rproc": {
+					"fw-partition-sectors": "<4864>"
+				},
+				"tdm0": {
+					"work_mode": "<0x1>"
+				},
+				"vind0": {
+					"csi_top": "<240000000>"
+				},
+				"isp00": {
+					"work_mode": "<0x1>"
+				},
+				"isp01": {
+					"status": "\"okay\"",
+					"rpbuf": "<&rpbuf_controller0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"scaler00": {
+					"work_mode": "<0x1>"
+				},
+				"scaler01": {
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"status": "\"okay\""
+				},
+				"scaler10": {
+					"work_mode": "<0x1>"
+				},
+				"scaler11": {
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"status": "\"okay\""
+				},
+				"sensor0": {
+					"sensor0_mname": "\"gc05a2_mipi\"",
+					"sensor0_twi_addr": "<0x6f>",
+					"sensor0_reset": "<&pio PA 0 GPIO_ACTIVE_LOW>",
+					"status": "\"okay\""
+				},
+				"vinc00": {
+					"work_mode": "<0x1>"
+				},
+				"vinc01": {
+					"vinc1_csi_sel": "<0>",
+					"vinc1_mipi_sel": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"okay\""
+				},
+				"vinc10": {
+					"work_mode": "<0x1>"
+				},
+				"vinc11": {
+					"vinc5_csi_sel": "<0>",
+					"vinc5_mipi_sel": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"okay\""
+				}
+			}
+		},
+		"kernel": [
+			"CONFIG_SUPPORT_ISP_TDM=y",
+			"CONFIG_SENSOR_GC05A2_MIPI=y",
+			"# CONFIG_SENSOR_GC1084_MIPI is not set",
+			"CONFIG_VIN_SENSOR_RESERVE_ADDR=0x81FFE000"
+		],
+		"partition_nor": [
+			{
+				"name": "riscv0",
+				"size": "4480"
+			}
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind": {
+				"csi_top": "240000000"
+			},
+			"vind/sensor0": {
+				"sensor0_mname": "\"gc05a2_mipi\"",
+				"sensor0_twi_addr": "\"0x6f\"",
+				"sensor0_reset": "\"port:PA0<1><0><1><0>\""
+			},
+			"vind/vinc0": {
+				"vinc0_tdm_rx_sel": "0",
+				"vinc0_width": "320",
+				"vinc0_height": "240",
+				"vinc0_merge_width": "1280",
+				"vinc0_merge_height": "720",
+				"vinc0_work_mode": "1",
+				"vinc0_mipi_num": "2"
+			},
+			"vind/vinc1": {
+				"vinc1_used": "1",
+				"vinc1_isp_sel": "1",
+				"vinc1_tdm_rx_sel": "1",
+				"vinc1_width": "320",
+				"vinc1_height": "240",
+				"vinc1_merge_width": "1280",
+				"vinc1_merge_height": "720",
+				"vinc1_use_sensor_list": "0",
+				"vinc1_mipi_num": "2"
+			}
+		},
+		// rtos configs
+		"rtos": [
+			"CONFIG_ARCH_MEM_LENGTH=0x440000",
+			"CONFIG_ISP_NUMBER=2",
+			"CONFIG_TDM_RX_BUF_NUM=1",
+			"CONFIG_VIN_WAIT_AMP_INIT_SEM_TIMEOUT=4000",
+			"CONFIG_ISP_MEMRESERVE_ADDR=0x81730000",
+			"CONFIG_ISP_MEMRESERVE_LEN=0x8d0000",
+			"CONFIG_RTOS_FW_RESERVED_MEM_ADDR=0x81484000"
+		]
+	}, //end of one_gc05a2_sensor
+	/*****************************one_imx219_sensor(2in1)************************************/
+	"one_imx219_sensor_(2in1)": {
+		"desc": "Set one camare of imx219 offline for ai_glasses",
+		"board.dts": {
+			"set_property": {
+				//s0vencfg0
+				"s0vencfg0": {
+					"res_w": "<1600>",
+					"res_h": "<1200>",
+					"fps": "<15>",
+					"jpg_w": "<3280>",
+					"jpg_h": "<2464>",
+				},
+				"tdm0": {
+					"work_mode": "<0x1>"
+				},
+				"vind0": {
+					"csi_top": "<240000000>"
+				},
+				"isp00": {
+					"work_mode": "<0x1>"
+				},
+				"isp01": {
+					"status": "\"okay\"",
+					"rpbuf": "<&rpbuf_controller0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"scaler00": {
+					"work_mode": "<0x1>"
+				},
+				"scaler01": {
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"status": "\"okay\""
+				},
+				"scaler10": {
+					"work_mode": "<0x1>"
+				},
+				"scaler11": {
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"status": "\"okay\""
+				},
+				"sensor0": {
+					"sensor0_mname": "\"imx219\"",
+					"sensor0_twi_addr": "<0x20>",
+					"sensor0_reset": "<&pio PA 0 GPIO_ACTIVE_LOW>",
+					"sensor0_pwdn": "<&pio PA 2 GPIO_ACTIVE_LOW>",
+					"status": "\"okay\""
+				},
+				"vinc00": {
+					"work_mode": "<0x1>"
+				},
+				"vinc01": {
+					"vinc1_csi_sel": "<0>",
+					"vinc1_mipi_sel": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"okay\""
+				},
+				"vinc10": {
+					"work_mode": "<0x1>"
+				},
+				"vinc11": {
+					"vinc5_csi_sel": "<0>",
+					"vinc5_mipi_sel": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"okay\""
+				}
+			}
+		},
+		"kernel": [
+			"CONFIG_SUPPORT_ISP_TDM=y",
+			"CONFIG_TDM_ONE_BUFFER=y",
+			"CONFIG_SENSOR_IMX219=y",
+			"CONFIG_SENSOR_IMX219_TWO_LANE_MIPI=y",
+			"# CONFIG_SENSOR_GC1084_MIPI is not set",
+			"# CONFIG_SENSOR_GC05A2 is not set",
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind": {
+				"csi_top": "240000000"
+			},
+			"vind/sensor0": {
+				"sensor0_mname": "\"imx219_mipi\"",
+				"sensor0_twi_addr": "0x20",
+				"sensor0_reset": "port:PA0<1><0><1><0>",
+				"sensor0_pwdn": "port:PA2<1><0><1><0>",
+			},
+			"vind/vinc0": {
+				"vinc0_tdm_rx_sel": "0",
+				"vinc0_width": "1600",
+				"vinc0_height": "1200",
+				"vinc0_merge_width": "3280",
+				"vinc0_merge_height": "2464",
+				"vinc0_work_mode": "1",
+				"vinc0_mipi_num": "2"
+			},
+			"vind/vinc1": {
+				"vinc1_used": "1",
+				"vinc1_isp_sel": "1",
+				"vinc1_tdm_rx_sel": "1",
+				"vinc1_width": "1600",
+				"vinc1_height": "1200",
+				"vinc1_merge_width": "3280",
+				"vinc1_merge_height": "2464",
+				"vinc1_use_sensor_list": "0",
+				"vinc1_mipi_num": "2"
+			}
+		},
+		// rtos configs
+		"rtos": [
+			"CONFIG_ISP_READ_THRESHOLD=y",
+			"CONFIG_SENSOR_IMX219_MIPI=y",
+			"# CONFIG_SENSOR_GC05A2_MIPI is not set",
+			"# CONFIG_ISP_FAST_CONVERGENCE is not set",
+		]
+	}, //end of one_imx219_sensor
+	/*****************************low_power_app************************************/
+	"low_power_app": {
+		"desc": "Open LOW POWER APP DEMO",
+		"rtos": [
+			"CONFIG_DRIVERS_PRCM=y",
+			"CONFIG_COMPONENTS_MQTTC=y",
+			"# CONFIG_COMPONENTS_PAHOMQTT is not set",
+			"CONFIG_COMPONENTS_COREMQTT_2_3_1=y",
+			"CONFIG_COMPONENTS_LOW_POWER_APP=y",
+			"# CONFIG_COMPONENTS_LOW_POWER_APP_TCP is not set",
+			"CONFIG_COMPONENTS_LOW_POWER_APP_MQTT=y"
+		],
+		"openwrt": [
+			"CONFIG_rt_media-mpp_demo_video_rtsp=y",
+			"CONFIG_rt_media-mpp_demo_video_webrtc=y",
+			"CONFIG_demo_video_webrtc_autostart=y",
+			"CONFIG_MBEDTLS_SSL_DTLS_SRTP=y"
+		]
+	}, //end of low_power_app
+	/*****************************ai_glass_app************************************/
+	"ag_glass_app": {
+		"desc": "Open Ai glass app",
+		"rtos": [
+			"CONFIG_COMPONENTS_RPBUF_UART=y",
+			"CONFIG_RPBUFF_UART_PORT=2",
+			"CONFIG_CLI_UART_PORT=1"
+		],
+		"kernel": [
+			"CONFIG_AG_LINK=y",
+			"CONFIG_AG_UART=y"
+		],
+		"openwrt": [
+			"CONFIG_rt_media-mpp_demo_ai_glass=y",
+			"CONFIG_demo_ai_glass_autostart=y",
+			"# CONFIG_rt_media_demo_video_in is not set"
+		]
+	}, //end of ai_glass_app
+	/*****************************pl2_pl3_uart3*************************/
+	"pl2_pl3_uart3": {
+		"desc": "Set debug uart to PL2 PL3 with UART3",
+		"board.dts": {
+			"bootargs": {
+				"earlyprintk": "sunxi-uart,0x42500c00",
+				"console": "ttyS3,1500000"
+			},
+			"set_property": {
+				"uart3": {
+					"pinctrl-0": "<&r_uart3_pins_default>",
+					"pinctrl-1": "<&r_uart3_pins_sleep>",
+					"status": "\"okay\""
+				},
+				"uart0": {
+					"status": "\"disabled\""
+				}
+			}
+		},
+		"sysconfig": {
+			"uart_para": {
+				"uart_debug_port": 3,
+				"uart_debug_tx": "port:PL02<3><1><default><default>",
+				"uart_debug_rx": "port:PL03<3><1><default><default>"
+			}
+		},
+		"BoardConfig": {
+			"LICHEE_BRANDY_DEFCONF": "sun300iw1p1_v821_uart3_defconfig"
+		},
+		"BoardConfig_nor": {
+			"LICHEE_BRANDY_DEFCONF": "sun300iw1p1_v821_uart3_defconfig"
+		}
+	}, // pl2_pl3_uart3
+
+	"switch_to_nor" : {
+		"desc" : "Switch storage type to spinor",
+		"finish_note": [
+			"change flash to emmc successful.\n",
+			"Please run those command\n",
+			"source build/envsetup.sh",
+			"lunch",
+			"mrtos menuconfig",
+			"mrtos clean\n",
+			"to apply this setting"
+		],
+		"configs": { "LICHEE_FLASH": "nor" },
+		"board.dts": {
+			"bootargs": {
+				"root": "/dev/mtdblock5",
+				"boot_type": "3",
+				"mbr_offset": "311296"
+			},
+			"set_property": {
+				"isp_param": { "partition_name" : "\"/dev/mtd5\"" },
+				"sdc0" : { "status" : "\"okay\"" },
+				"spif0" : { "status" : "\"okay\"" }
+			}
+		},
+		"sysconfig": { "target": { "storage_type": 3 } },
+		"uboot-board.dts" : { "set_property": { "target": { "storage_type": "<3>" } } },
+		"kernel": [
+			"CONFIG_AW_MTD=y",
+			"CONFIG_AW_MTD_SUNXI_PARTS=y",
+			"CONFIG_AW_MTD_SPI_NOR_5_4=y",
+			"CONFIG_SPINOR_UBOOT_OFFSET=280",
+			"# CONFIG_MTD_SPI_NOR_USE_4K_SECTORS is not set",
+			"CONFIG_SPIF_SUNXI=y",
+			"CONFIG_AW_SPI_NG=y",
+			"# CONFIG_AW_SPI_NG_DBI is not set",
+			"# CONFIG_AW_SPI_NG_CAMERA is not set",
+			"CONFIG_AW_SPI_NG_ATOMIC_XFER=y",
+			"CONFIG_SPI_SPIDEV=y",
+			"CONFIG_SPI_SLAVE=y",
+			"CONFIG_JFFS2_FS=y"
+		],
+		"openwrt": [ "optimize_rootfs_nor.fragment" ],
+		"partition_nor" : [ { "name" : "mbr" } ], // use auto to update partition cmdline
+		"cmd" : [
+			"mkdir -p ${LICHEE_PLAT_OUT}/ota_sdnand",
+			"cp ${LICHEE_PACK_OUT_DIR}/boot0_sdcard.fex ${LICHEE_PLAT_OUT}/ota_sdnand",
+			"cp ${LICHEE_PACK_OUT_DIR}/boot_package.fex ${LICHEE_PLAT_OUT}/ota_sdnand",
+			"cp ${LICHEE_PACK_OUT_DIR}/boot.fex ${LICHEE_PLAT_OUT}/ota_sdnand",
+			"cp ${LICHEE_PACK_OUT_DIR}/rootfs.fex ${LICHEE_PLAT_OUT}/ota_sdnand",
+			"cp ${LICHEE_PACK_OUT_DIR}/amp_rv0.fex ${LICHEE_PLAT_OUT}/ota_sdnand",
+			"cp ${LICHEE_PACK_OUT_DIR}/boot.fex ${LICHEE_PLAT_OUT}/boot.default",
+			"cp ${LICHEE_PACK_OUT_DIR}/rootfs.fex ${LICHEE_PLAT_OUT}/rootfs.default",
+			"cp ${LICHEE_PLAT_OUT}/.buildconfig ${LICHEE_PLAT_OUT}/.buildconfig_default"
+		]
+	},
+
+	"ai_glasses config" : {
+		"desc" : "Quick config ai_glasses for Sochip",
+		"finish_note": [
+			"change config about for Sochip ai_glasses.\n",
+			"Please run those command\n",
+			"source build/envsetup.sh",
+			"lunch",
+			"mrtos menuconfig",
+			"mrtos clean\n",
+			"to apply this setting"
+		],
+		"board.dts": {
+			"bootargs": {
+				"console": "ttyS0,1500000"
+			},
+			"set_property": {
+				"uart0": {
+					"status": "\"okay\""
+				},
+				"uart3": {
+					"status": "\"disabled\""
+				}
+			}
+		},
+		"rtos_sysconfig": {
+			"uart_dma": {
+				"uart3_dma_used": "1",
+				"uart2_dma_used": "0"
+			}
+		},
+		"rtos": [
+			"CONFIG_RPBUFF_UART_PORT=3"
+		],
+		"cmd" : [
+			"echo \"ai_glasses config into cmd config!\"",
+			"sed -i 's/^erase_sdnand_boot0$/#erase_sdnand_boot0/g' ${LICHEE_TOP_DIR}/openwrt/target/v821/v821-aiglass/busybox-init-base-files/files/init"
+		]
+	}
+}

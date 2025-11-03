@@ -1,0 +1,34 @@
+{
+	/*
+		built-in variables:
+			rootfs: tine rootfs path
+			configs: device config path (via cconfigs cmd)
+			plat: plat config path (via cplat cmd)
+	*/
+
+	"status": "okay",
+	"dir": "${plat}/configs/user-resource",
+
+	"prep_cmd": [
+		"mkdir -p ${dir}",
+		"mkdir -p ${dir}/usr/sbin"
+	],
+	"auto_copy": {
+		"lib/libwirelesscom.so" : "${rootfs}/lib/libwirelesscom.so" // demo
+	},
+	"post_cmd": [
+		/* test */
+		"cp -rd ${rootfs}/lib ${dir}",
+		"cp -rd ${rootfs}/usr/lib/libwolfssl.so.5.1.1.99a5b54a ${dir}/lib",
+		"cp -rd ${rootfs}/usr/sbin/wpad ${dir}/usr/sbin/",
+		"cp -rd ${rootfs}/usr/sbin/wpa_supplicant ${dir}/usr/sbin/",
+		"cp -rd ${rootfs}/usr/sbin/hostapd ${dir}/usr/sbin/",
+		"cp -rd ${rootfs}/usr/sbin/dnsmasq ${dir}/usr/sbin/",
+		"rm ${dir}/lib/libgcc_s.so.1",
+		"rm ${dir}/lib/libc.so",
+		"rm ${dir}/lib/ld-musl-riscv32.so.1",
+		"${LICHEE_TOP_DIR}/openwrt/openwrt/staging_dir/host/bin/mksquashfs4 ${plat}/configs/user-resource ${configs}/user.squashfs -nopad -noappend -root-owned -comp lzo -b 32k -processors 16",
+		"dd if=${configs}/user.squashfs of=${configs}/user.fex bs=128k conv=sync",
+		"cp ${configs}/user.fex ${LICHEE_PACK_OUT_DIR} -r"
+	]
+}

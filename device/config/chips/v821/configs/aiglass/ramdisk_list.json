@@ -1,0 +1,21 @@
+{
+	/*
+		built-in variables:
+			rootfs: tine rootfs path
+			configs: device config path (via cconfigs cmd)
+			plat: plat config path (via cplat cmd)
+	*/
+	"compress": "lz4",
+	"src": "${configs}/ramdisk",
+	"auto_copy": {
+		"lib/libawion.so": "${rootfs}/lib/libawion.so",
+		"lib/librt_media.so": "${rootfs}/lib/librt_media.so",
+		"bin/demo_video_in": "${rootfs}/bin/demo_video_in",
+		"etc/ld-musl-riscv32.path": "${rootfs}/etc/ld-musl-riscv32.path"
+	},
+	"cmd": [
+		"mkdir -p ${src}/bin",
+		"find ${rootfs}/bin/ -type l -exec cp -d {} ${src}/bin \\;",
+		"[ -e ${rootfs}/bin/busybox ] && cp ${rootfs}/bin/busybox ${src}/bin"
+	]
+}

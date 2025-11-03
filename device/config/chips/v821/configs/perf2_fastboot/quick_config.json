@@ -1,0 +1,899 @@
+/*
+*--Instructions--
+* name_of_configuare : {
+*	"sysconfig" : {}, ==> sys_config.fex
+*	"board.dts" : {}, ==> board.dts
+*	"bootpkg" : {}, ==>boot_package.cfg
+*	"env" : {}, ==> env.cfg
+*   "uboot-board.dts" : {}, ==>uboot-board.dts
+*   "partition" ==> sys_partition.fex
+*   "kernel" : {}, ==>linux-5.4-ansc/bsp_defconfig
+*	"openwrt" : {}, ==>openwrt/target/xxx/defconfig
+*},
+*/
+{
+	"use_common_conifg": true,
+	"quick_config_include": [
+		"fastboot_common.json",
+		"fastboot_storage_change.json",
+		"sensor_fastboot.json"
+	],
+	/*****************************one_gc1084_sensor************************************/
+	"default_sensor_config": {
+		"desc": "set to default camera config (gc1084)",
+		"board.dts": {
+			"set_property": {
+				"rv_ddr_reserved": {
+					"reg": "<0x0 0x81000000 0x0 0x380000>",
+					"no-map": null
+				},
+				"rv_vdev0buffer": {
+					"compatible": "\"shared-dma-pool\"",
+					"reg": "<0x0 0x81380000 0x0 0x40000>",
+					"no-map": null
+				},
+				"rv_vdev0vring0": {
+					"reg": "<0x0 0x813c0000 0x0 0x2000>",
+					"no-map": null
+				},
+				"rv_vdev0vring1": {
+					"reg": "<0x0 0x813c2000 0x0 0x2000>",
+					"no-map": null
+				},
+				"e907_mem_fw": {
+					"reg": "<0x0 0x813c4000 0x0 0x00280000>"
+				},
+				"e907_share_irq_table": {
+					"reg": "<0x0 0x81644000 0x0 0x2000>",
+					"no-map": null
+				},
+				"e907_rpbuf_reserved": {
+					"compatible": "\"shared-dma-pool\"",
+					"reg": "<0x0 0x81646000 0x0 0x60000>",
+					"no-map": null
+				},
+				"isp_dram_reserved": {
+					"reg": "<0x0 0x816a6000 0x0 0x0065A000>"
+				},
+				"size_pool": {
+					"reg": "<0 0x82000000 0 0x01400000>"
+				},
+				"linux,cma": {
+					"size": "<0x0 0x400000>"
+				},
+				"heap_size_pool@0": {
+					"compatible": "\"allwinner,size_pool\"",
+					"heap-name": "\"size_pool\"",
+					"heap-id": "<0x7>",
+					"heap-base": "<0x82000000>",
+					"heap-size": "<0x01400000>",
+					"heap-type": "\"ion_size_pool\"",
+					"thrs": "<100>",
+					"sizes": "<0 20480>",
+					"fall_to_big_pool": "<1>"
+				},
+				"sensor_0_venc": {
+					"status": "\"okay\""
+				},
+				"s0vencfg0": {
+					"status": "\"okay\"",
+					"ch_id": "<0>",
+					"enable_online": "<0>",
+					"online_share_buf_num": "<1>",
+					"vin_buf_num": "<0>",
+					"codec_type": "<0>",
+					"res_w": "<1280>",
+					"res_h": "<720>",
+					"fps": "<15>",
+					"bit_rate": "<1536>",
+					"gop": "<40>",
+					"enable_sharp": "<1>",
+					"product_mode": "<0>",
+					"vbr": "<1>",
+					"vbr_opt_enable": "<1>",
+					"drop_frame_num": "<0>",
+					"init_qp": "<35>",
+					"i_min_qp": "<25>",
+					"i_max_qp": "<45>",
+					"p_min_qp": "<25>",
+					"p_max_qp": "<45>",
+					"enable_mb_qp_limit": "<1>",
+					"moving_th": "<20>",
+					"quality": "<1>",
+					"i_frm_bits_coef": "<10>",
+					"p_frm_bits_coef": "<10>",
+					"out_mode": "<0>",
+					"pix_fmt": "<12>",
+					"reduce_refrec_mem": "<0>",
+					"isp2ve_en": "<1>",
+					"ve2isp_en": "<1>",
+					"region_detect_link_en": "<0>",
+					"enable_tdm_raw": "<0>",
+					"tdm_rxbuf_cnt": "<0>",
+					"dma_merge_mode": "<0>",
+					"catchjpg_en": "<0>",
+					"jpg_w": "<1280>",
+					"jpg_h": "<720>",
+					"jpg_qp": "<80>",
+					"jpg_enable_sharp": "<0>"
+				},
+				"s0vencfg1": {
+					"status": "\"disabled\"",
+					"ch_id": "<4>",
+					"enable_online": "<0>",
+					"online_share_buf_num": "<1>",
+					"vin_buf_num": "<0>",
+					"codec_type": "<0>",
+					"res_w": "<640>",
+					"res_h": "<360>",
+					"fps": "<15>",
+					"bit_rate": "<1536>",
+					"gop": "<40>",
+					"enable_sharp": "<1>",
+					"product_mode": "<0>",
+					"vbr": "<1>",
+					"vbr_opt_enable": "<1>",
+					"drop_frame_num": "<0>",
+					"init_qp": "<35>",
+					"i_min_qp": "<25>",
+					"i_max_qp": "<45>",
+					"p_min_qp": "<25>",
+					"p_max_qp": "<45>",
+					"enable_mb_qp_limit": "<1>",
+					"moving_th": "<20>",
+					"quality": "<1>",
+					"i_frm_bits_coef": "<10>",
+					"p_frm_bits_coef": "<10>",
+					"out_mode": "<1>",
+					"pix_fmt": "<0>",
+					"reduce_refrec_mem": "<0>",
+					"isp2ve_en": "<1>",
+					"ve2isp_en": "<0>",
+					"region_detect_link_en": "<0>",
+					"enable_tdm_raw": "<0>",
+					"tdm_rxbuf_cnt": "<0>",
+					"dma_merge_mode": "<0>",
+					"catchjpg_en": "<0>",
+					"jpg_w": "<640>",
+					"jpg_h": "<360>",
+					"jpg_qp": "<80>",
+					"jpg_enable_sharp": "<0>"
+				},
+				"sensor_1_venc": {
+					"status": "\"disabled\""
+				},
+				"s1vencfg0": {
+					"status": "\"disabled\"",
+					"ch_id": "<1>",
+					"enable_online": "<0>",
+					"online_share_buf_num": "<1>",
+					"vin_buf_num": "<0>",
+					"codec_type": "<0>",
+					"res_w": "<1280>",
+					"res_h": "<720>",
+					"fps": "<15>",
+					"bit_rate": "<1536>",
+					"gop": "<40>",
+					"enable_sharp": "<1>",
+					"product_mode": "<0>",
+					"vbr": "<1>",
+					"vbr_opt_enable": "<1>",
+					"drop_frame_num": "<0>",
+					"init_qp": "<35>",
+					"i_min_qp": "<25>",
+					"i_max_qp": "<45>",
+					"p_min_qp": "<25>",
+					"p_max_qp": "<45>",
+					"enable_mb_qp_limit": "<1>",
+					"moving_th": "<20>",
+					"quality": "<1>",
+					"i_frm_bits_coef": "<10>",
+					"p_frm_bits_coef": "<10>",
+					"out_mode": "<0>",
+					"pix_fmt": "<12>",
+					"reduce_refrec_mem": "<0>",
+					"isp2ve_en": "<1>",
+					"ve2isp_en": "<1>",
+					"region_detect_link_en": "<0>",
+					"enable_tdm_raw": "<0>",
+					"tdm_rxbuf_cnt": "<0>"
+				},
+				"sensor_2_venc": {
+					"status": "\"disabled\""
+				},
+				"s2vencfg0": {
+					"status": "\"disabled\"",
+					"ch_id": "<2>",
+					"enable_online": "<0>",
+					"online_share_buf_num": "<1>",
+					"vin_buf_num": "<0>",
+					"codec_type": "<0>",
+					"res_w": "<1280>",
+					"res_h": "<720>",
+					"fps": "<15>",
+					"bit_rate": "<1536>",
+					"gop": "<40>",
+					"enable_sharp": "<1>",
+					"product_mode": "<0>",
+					"vbr": "<1>",
+					"vbr_opt_enable": "<1>",
+					"drop_frame_num": "<0>",
+					"init_qp": "<35>",
+					"i_min_qp": "<25>",
+					"i_max_qp": "<45>",
+					"p_min_qp": "<25>",
+					"p_max_qp": "<45>",
+					"enable_mb_qp_limit": "<1>",
+					"moving_th": "<20>",
+					"quality": "<1>",
+					"i_frm_bits_coef": "<10>",
+					"p_frm_bits_coef": "<10>",
+					"out_mode": "<0>",
+					"pix_fmt": "<12>",
+					"reduce_refrec_mem": "<0>",
+					"isp2ve_en": "<1>",
+					"ve2isp_en": "<1>",
+					"region_detect_link_en": "<0>",
+					"enable_tdm_raw": "<0>",
+					"tdm_rxbuf_cnt": "<0>"
+				},
+				"csi1": {
+					"status": "\"disabled\"",
+					"pinctrl-names": "\"default\",\"sleep\"",
+					"pinctrl-0": "<&ncsi_bt656_pins_a>",
+					"pinctrl-1": "<&ncsi_bt656_pins_b>"
+				},
+				"tdm0": {
+					"work_mode": "<0x0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>"
+				},
+				"isp00": {
+					"work_mode": "<0x0>",
+					"ldci_select": "<0x1>",
+					"rpbuf": "<&rpbuf_controller0>",
+					"isp-region": "<&isp_dram_reserved>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>"
+				},
+				"isp01": {
+					"status": "\"disabled\"",
+					"ldci_select": "<0x1>",
+					"rpbuf": "<&rpbuf_controller0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"isp10": {
+					"status": "\"disabled\""
+				},
+				"scaler00": {
+					"work_mode": "<0x0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>"
+				},
+				"scaler01": {
+					"work_mode": "<0xff>",
+					"status": "\"disabled\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"scaler10": {
+					"work_mode": "<0x0>",
+					"status": "\"okay\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>"
+				},
+				"scaler11": {
+					"work_mode": "<0xff>",
+					"status": "\"disabled\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"actuator0": {
+					"device_type": "\"actuator0\"",
+					"actuator0_slave": "<0x18>",
+					"actuator0_af_pwdn": "<>",
+					"actuator0_afvdd": "\"afvcc-csi\"",
+					"actuator0_afvdd_vol": "<2800000>",
+					"status": "\"disabled\""
+				},
+				"flash0": {
+					"device_type": "\"flash0\"",
+					"flash0_type": "<2>",
+					"flash0_en": "<>",
+					"flash0_mode": "<>",
+					"flash0_flvdd": "\"\"",
+					"flash0_flvdd_vol": "<>",
+					"device_id": "<0>",
+					"status": "\"disabled\""
+				},
+				"sensor0": {
+					"device_type": "\"sensor0\"",
+					"sensor0_mname": "\"gc1084_mipi\"",
+					"sensor0_twi_cci_id": "<0>",
+					"sensor0_twi_addr": "<0x6e>",
+					"sensor0_mclk_id": "<0>",
+					"sensor0_pos": "\"rear\"",
+					"sensor0_isp_used": "<1>",
+					"sensor0_fmt": "<1>",
+					"sensor0_stby_mode": "<0>",
+					"sensor0_vflip": "<0>",
+					"sensor0_hflip": "<0>",
+					"sensor0_iovdd-supply": "<>",
+					"sensor0_iovdd_vol": "<>",
+					"sensor0_avdd-supply": "<>",
+					"sensor0_avdd_vol": "<>",
+					"sensor0_dvdd-supply": "<>",
+					"sensor0_dvdd_vol": "<>",
+					"sensor0_power_en": "<>",
+					"sensor0_reset": "<&pio PD 12 GPIO_ACTIVE_LOW>",
+					"sensor0_pwdn": "<>",
+					"status": "\"okay\""
+				},
+				"sensor1": {
+					"device_type": "\"sensor1\"",
+					"sensor1_mname": "\"gc1084_mipi_2\"",
+					"sensor1_twi_cci_id": "<0>",
+					"sensor1_twi_addr": "<0x7e>",
+					"sensor1_mclk_id": "<1>",
+					"sensor1_pos": "\"front\"",
+					"sensor1_isp_used": "<1>",
+					"sensor1_fmt": "<1>",
+					"sensor1_stby_mode": "<0>",
+					"sensor1_vflip": "<0>",
+					"sensor1_hflip": "<0>",
+					"sensor1_iovdd-supply": "<>",
+					"sensor1_iovdd_vol": "<>",
+					"sensor1_avdd-supply": "<>",
+					"sensor1_avdd_vol": "<>",
+					"sensor1_dvdd-supply": "<>",
+					"sensor1_dvdd_vol": "<>",
+					"sensor1_power_en": "<>",
+					"sensor1_reset": "<&pio PD 13 GPIO_ACTIVE_LOW>",
+					"status": "\"disabled\""
+				},
+				"sensor_list0": {
+					"sensor00_mname": "\"gc5035_mipi\"",
+					"sensor00_twi_addr": "<0x6c>",
+					"sensor00_type": "<1>",
+					"sensor00_hflip": "<0>",
+					"sensor00_vflip": "<0>",
+					"sensor00_act_used": "<1>",
+					"sensor00_act_name": "\"dw9714_act\"",
+					"sensor00_act_twi_addr": "<0x18>",
+					"sensor01_mname": "\"ov5675_mipi\"",
+					"sensor01_twi_addr": "<0x6c>",
+					"sensor01_type": "<1>",
+					"sensor01_hflip": "<0>",
+					"sensor01_vflip": "<0>",
+					"sensor01_act_used": "<1>",
+					"sensor01_act_name": "\"dw9714_act\"",
+					"sensor01_act_twi_addr": "<0x18>",
+					"sensor02_mname": "\"sp5409_mipi\"",
+					"sensor02_twi_addr": "<0x78>",
+					"sensor02_type": "<1>",
+					"sensor02_hflip": "<0>",
+					"sensor02_vflip": "<0>",
+					"sensor02_act_used": "<1>",
+					"sensor02_act_name": "\"dw9714_act\"",
+					"sensor02_act_twi_addr": "<0x18>",
+					"status": "\"disabled\""
+				},
+				"sensor_list1": {
+					"sensor10_mname": "\"gc02m2_mipi\"",
+					"sensor10_twi_addr": "<0x20>",
+					"sensor10_type": "<1>",
+					"sensor10_hflip": "<0>",
+					"sensor10_vflip": "<0>",
+					"sensor10_act_used": "<0>",
+					"sensor10_act_name": "\"\"",
+					"sensor10_act_twi_addr": "<>",
+					"sensor11_mname": "\"ov02a10_mipi\"",
+					"sensor11_twi_addr": "<0x7a>",
+					"sensor11_type": "<1>",
+					"sensor11_hflip": "<1>",
+					"sensor11_vflip": "<0>",
+					"sensor11_act_used": "<0>",
+					"sensor11_act_name": "\"\"",
+					"sensor11_act_twi_addr": "<>",
+					"sensor12_mname": "\"gc030a_mipi\"",
+					"sensor12_twi_addr": "<0x42>",
+					"sensor12_type": "<1>",
+					"sensor12_hflip": "<0>",
+					"sensor12_vflip": "<0>",
+					"sensor12_act_used": "<0>",
+					"sensor12_act_name": "\"\"",
+					"sensor12_act_twi_addr": "<>",
+					"status": "\"disabled\""
+				},
+				"vinc00": {
+					"vinc0_csi_sel": "<0>",
+					"vinc0_mipi_sel": "<0>",
+					"vinc0_isp_sel": "<0>",
+					"vinc0_isp_tx_ch": "<0>",
+					"vinc0_tdm_rx_sel": "<0>",
+					"vinc0_rear_sensor_sel": "<0>",
+					"vinc0_front_sensor_sel": "<0>",
+					"vinc0_sensor_list": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"vinc01": {
+					"vinc1_csi_sel": "<1>",
+					"vinc1_mipi_sel": "<1>",
+					"vinc1_isp_sel": "<1>",
+					"vinc1_isp_tx_ch": "<0>",
+					"vinc1_tdm_rx_sel": "<1>",
+					"vinc1_rear_sensor_sel": "<0>",
+					"vinc1_front_sensor_sel": "<0>",
+					"vinc1_sensor_list": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"disabled\""
+				},
+				"vinc10": {
+					"vinc4_csi_sel": "<0>",
+					"vinc4_mipi_sel": "<0>",
+					"vinc4_isp_sel": "<0>",
+					"vinc4_isp_tx_ch": "<0>",
+					"vinc4_tdm_rx_sel": "<0>",
+					"vinc4_rear_sensor_sel": "<0>",
+					"vinc4_front_sensor_sel": "<0>",
+					"vinc4_sensor_list": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"work_mode": "<0x0>",
+					"status": "\"okay\""
+				},
+				"vinc11": {
+					"vinc5_csi_sel": "<1>",
+					"vinc5_mipi_sel": "<1>",
+					"vinc5_isp_sel": "<1>",
+					"vinc5_isp_tx_ch": "<0>",
+					"vinc5_tdm_rx_sel": "<1>",
+					"vinc5_rear_sensor_sel": "<0>",
+					"vinc5_front_sensor_sel": "<0>",
+					"vinc5_sensor_list": "<0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>",
+					"status": "\"disabled\""
+				},
+				"e907_rproc": {
+					"fw-partition-sectors": "<4096>"
+				}
+			}
+		},
+		"partition_nor": [
+			{
+				"name": "riscv0",
+				"size": "4096"
+			}
+		],
+		"partition": [
+			{
+				"name": "riscv0",
+				"size": "4096"
+			}
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind": {
+				"vind_user": "1",
+				"csi_top": "200000000",
+				"csi_top_parent": "1200000000"
+			},
+			"vind/sensor0": {
+				"sensor0_used": "1",
+				"sensor0_mname": "\"gc1084_mipi\"",
+				"sensor0_twi_cci_id": "0",
+				"sensor0_twi_addr": "0x6e",
+				"sensor0_mclk_id": "0",
+				"sensor0_isp_used": "1",
+				"sensor0_power_en": "port:PD12<default><default><default><default>",
+				"sensor0_pwdn": "port:PD12<default><default><default><default>",
+				"sensor0_reset": "port:PD12<1><0><1><0>",
+				"sensor0_sm_hs": "port:PD12<default><default><default><default>",
+				"sensor0_sm_vs": "port:PD12<default><default><default><default>",
+				"sensor0_ir_cut0": "port:PD12<default><default><default><default>",
+				"sensor0_ir_cut1": "port:PD12<default><default><default><default>",
+				"sensor0_ir_led": "port:PD12<default><default><default><default>"
+			},
+			"vind/sensor1": {
+				"sensor1_used": "0",
+				"sensor1_mname": "\"ar0238\"",
+				"sensor1_twi_cci_id": "1",
+				"sensor1_twi_addr": "0x20",
+				"sensor1_mclk_id": "1",
+				"sensor1_isp_used": "0",
+				"sensor1_power_en": null,
+				"sensor1_reset": null,
+				"sensor1_pwdn": "0",
+				"sensor1_sm_hs": "port:PI0<1><0><1><0>",
+				"sensor1_sm_vs": "port:PI1<1><0><1><0>",
+				"sensor0_ir_cut0": "port:",
+				"sensor0_ir_cut1": "port:",
+				"sensor0_ir_led": "port:"
+			},
+			"vind/vinc0": {
+				"vinc0_used": "1",
+				"vinc0_csi_sel": "0",
+				"vinc0_mipi_sel": "0",
+				"vinc0_isp_sel": "0",
+				"vinc0_isp_tx_ch": "0",
+				"vinc0_tdm_rx_sel": "0xff",
+				"vinc0_rear_sensor_sel": "0",
+				"vinc0_front_sensor_sel": "0",
+				"vinc0_width": "1280",
+				"vinc0_height": "720",
+				"vinc0_use_sensor_list": "0",
+				"vinc0_mipi_num": "1",
+				"vinc0_work_mode": "0",
+				"vinc0_merge_width": "0",
+				"vinc0_merge_height": "0"
+			},
+			"vind/vinc1": {
+				"vinc1_used": "0",
+				"vinc1_csi_sel": "0",
+				"vinc1_mipi_sel": "0",
+				"vinc1_isp_sel": "0",
+				"vinc1_isp_tx_ch": "0",
+				"vinc1_tdm_rx_sel": "0",
+				"vinc1_rear_sensor_sel": "0",
+				"vinc1_front_sensor_sel": "0",
+				"vinc1_width": "320",
+				"vinc1_height": "240",
+				"vinc1_use_sensor_list": "0",
+				"vinc1_mipi_num": "0",
+				"vinc1_merge_width": "0",
+				"vinc1_merge_height": "0"
+			},
+			"vind/vinc4": {
+				"vinc4_used": "0",
+				"vinc4_csi_sel": "0",
+				"vinc4_mipi_sel": "0",
+				"vinc4_isp_sel": "0",
+				"vinc4_isp_tx_ch": "0",
+				"vinc4_tdm_rx_sel": "0",
+				"vinc4_rear_sensor_sel": "0",
+				"vinc4_front_sensor_sel": "0",
+				"vinc4_width": "1280",
+				"vinc4_height": "720",
+				"vinc4_use_sensor_list": "0",
+				"vinc4_mipi_num": "1",
+				"vinc4_work_mode": "0"
+			},
+			"vind/vinc5": {
+				"vinc5_used": "0",
+				"vinc5_csi_sel": "0",
+				"vinc5_mipi_sel": "0",
+				"vinc5_isp_sel": "0",
+				"vinc5_isp_tx_ch": "0",
+				"vinc5_tdm_rx_sel": "0",
+				"vinc5_rear_sensor_sel": "0",
+				"vinc5_front_sensor_sel": "0"
+			}
+		}
+	}, //end of default_sensor_config
+	/*****************************default_dual_sensor_config************************************/
+	"default_dual_sensor_config": {
+		"desc": "set dual camera of base for this board (gc1084_dual)",
+		"depends": [
+			"default_sensor_config"
+		],
+		"board.dts": {
+			"set_property": {
+				"rv_ddr_reserved": {
+					"reg": "<0x0 0x81000000 0x0 0x440000>"
+				},
+				"rv_vdev0buffer": {
+					"reg": "<0x0 0x81440000 0x0 0x40000>"
+				},
+				"rv_vdev0vring0": {
+					"reg": "<0x0 0x81480000 0x0 0x2000>"
+				},
+				"rv_vdev0vring1": {
+					"reg": "<0x0 0x81482000 0x0 0x2000>"
+				},
+				"e907_mem_fw": {
+					"reg": "<0x0 0x81484000 0x0 0x0025B000>"
+				},
+				"e907_share_irq_table": {
+					"reg": "<0x0 0x816EE000 0x0 0x2000>"
+				},
+				"e907_rpbuf_reserved": {
+					"reg": "<0x0 0x816F0000 0x0 0x40000>"
+				},
+				"isp_dram_reserved": {
+					"reg": "<0x0 0x81730000 0x0 0x005d0000>"
+				},
+				"sensor_1_venc": {
+					"status": "\"okay\""
+				},
+				"s1vencfg0": {
+					"status": "\"okay\""
+				},
+				"csi1": {
+					"pinctrl-0": "<>",
+					"pinctrl-1": "<>",
+					"status": "\"okay\""
+				},
+				"tdm0": {
+					"work_mode": "<0x1>"
+				},
+				"isp00": {
+					"work_mode": "<0x1>"
+				},
+				"isp01": {
+					"status": "\"okay\"",
+					"ldci_select": "<0x1>",
+					"rpbuf": "<&rpbuf_controller0>",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"scaler00": {
+					"work_mode": "<0x1>"
+				},
+				"scaler01": {
+					"status": "\"okay\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"scaler10": {
+					"work_mode": "<0x1>",
+					"status": "\"okay\""
+				},
+				"scaler11": {
+					"status": "\"okay\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\""
+				},
+				"sensor0": {
+					"sensor0_mname": "\"gc1084_mipi\"",
+					"sensor0_twi_addr": "<0x7e>",
+					"status": "\"okay\""
+				},
+				"sensor1": {
+					"sensor1_mname": "\"gc1084_mipi_2\"",
+					"sensor1_twi_addr": "<0x6e>",
+					"status": "\"okay\""
+				},
+				"vinc00": {
+					"work_mode": "<0x1>",
+					"status": "\"okay\""
+				},
+				"vinc01": {
+					"vinc1_rear_sensor_sel": "<1>",
+					"vinc1_front_sensor_sel": "<1>",
+					"status": "\"okay\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>"
+				},
+				"vinc10": {
+					"work_mode": "<0x1>",
+					"status": "\"okay\""
+				},
+				"vinc11": {
+					"vinc5_rear_sensor_sel": "<1>",
+					"vinc5_front_sensor_sel": "<1>",
+					"status": "\"okay\"",
+					"rpmsg-ser-name": "\"43030000.e907_rproc\"",
+					"delay_init": "<1>"
+				},
+				"e907_rproc": {
+					"fw-partition-sectors": "<4864>"
+				}
+			}
+		},
+		"partition_nor": [
+			{
+				"name": "riscv0",
+				"size": "4864"
+			}
+		],
+		"partition": [
+			{
+				"name": "riscv0",
+				"size": "4864"
+			}
+		],
+		// enable sensor complile
+		"kernel": [
+			"CONFIG_SUPPORT_ISP_TDM=y",
+			"CONFIG_SENSOR_GC1084_MIPI_USE_SAME_TWI=y",
+			"CONFIG_RT_MEDIA_DUAL_SENSOR=y"
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind/sensor1": {
+				"sensor1_used": 1,
+				"sensor1_mname": "\"gc1084_mipi_2\"",
+				"sensor1_twi_cci_id": 0,
+				"sensor1_twi_addr": "0x6e",
+				"sensor1_isp_used": 1,
+				"sensor1_power_en": "port:PD13<default><default><default><default>",
+				"sensor1_reset": "port:PD13<1><0><1><0>",
+				"sensor1_pwdn": "port:PD13<default><default><default><default>",
+				"sensor1_sm_hs": "port:PD13<default><default><default><default>",
+				"sensor1_sm_vs": "port:PD13<default><default><default><default>",
+				"sensor0_ir_cut0": "port:PD13<default><default><default><default>",
+				"sensor0_ir_cut1": "port:PD13<default><default><default><default>",
+				"sensor0_ir_led": "port:PD13<default><default><default><default>"
+			},
+			"vind/vinc0": {
+				"vinc0_tdm_rx_sel": 0,
+				"vinc0_width": 320,
+				"vinc0_height": 240,
+				"vinc0_work_mode": 1
+			},
+			"vind/vinc1": {
+				"vinc1_used": 1,
+				"vinc1_csi_sel": 1,
+				"vinc1_mipi_sel": 1,
+				"vinc1_isp_sel": 1,
+				"vinc1_tdm_rx_sel": 1,
+				"vinc1_rear_sensor_sel": 1,
+				"vinc1_front_sensor_sel": 1,
+				"vinc1_width": 320,
+				"vinc1_height": 240,
+				"vinc1_use_sensor_list": 0,
+				"vinc1_mipi_num": 1
+			}
+		},
+		// rtos configs
+		"rtos": [
+			"CONFIG_ARCH_MEM_LENGTH=0x440000",
+			"CONFIG_ISP_NUMBER=2",
+			"CONFIG_TDM_RX_BUF_NUM=2",
+			"CONFIG_VIN_WAIT_AMP_INIT_SEM_TIMEOUT=4000",
+			"CONFIG_ISP_MEMRESERVE_ADDR=0x81730000",
+			"CONFIG_ISP_MEMRESERVE_LEN=0x5d0000",
+			"CONFIG_SENSOR_GC1084_MIPI_USE_SAME_TWI=y",
+			"CONFIG_RTOS_FW_RESERVED_MEM_ADDR=0x81484000"
+		]
+	}, //end of default_dual_sensor_config
+	/*****************************lcd nv3049f*************************/
+	"lcd_nv3049f_480_854": {
+		"desc": "Set to support lcd nv3049f",
+		"board.dts": {
+			"set_property": {
+				"linux,cma": {
+					"size": "<0x0 0x800000>"
+				},
+				"disp": {
+					"fb0_map": "<0 0 0 16>",
+					"fb0_width": "<480>",
+					"fb0_height": "<854>"
+				},
+				"lcd0": {
+					"lcd_driver_name": "\"nv3049f\"",
+					"lcd_hv_if": "<8>",
+					"lcd_x": "<480>",
+					"lcd_y": "<854>",
+					"lcd_width": "<60>",
+					"lcd_height": "<100>",
+					"lcd_dclk_freq": "<71>",
+					"lcd_hbp": "<23>",
+					"lcd_ht": "<1479>",
+					"lcd_hspw": "<2>",
+					"lcd_vbp": "<8>",
+					"lcd_vt": "<870>",
+					"lcd_vspw": "<2>",
+					"lcd_pwm_used": "<0>",
+					"lcd_frm": "<0>",
+					"lcd_hv_clk_phase": "<1>",
+					"lcd_hv_sync_polarity": "<0>",
+					"lcd_hv_srgb_seq": "<10>",
+					"lcd_gpio_0": "<&pio PD 17 GPIO_ACTIVE_LOW>",
+					"lcd_gpio_1": "<&pio PD 15 GPIO_ACTIVE_LOW>",
+					"lcd_gpio_2": "<&pio PD 16 GPIO_ACTIVE_LOW>",
+					"pinctrl-0": "<&rgb8_pins_a>, <&rgb8_pins_ctl_a>",
+					"pinctrl-1": "<&rgb8_pins_b>, <&rgb8_pins_ctl_b>"
+				},
+				/* fix pinmux */
+				"gmac0": {
+					"status": "\"disabled\""
+				},
+				"sensor0": {
+					"sensor0_reset": "<&pio PD 14 GPIO_ACTIVE_LOW>"
+				}
+			}
+		},
+		"kernel": [
+			"CONFIG_AW_DISP2=y",
+			"CONFIG_LCD_SUPPORT_NV3049F=y"
+		],
+		// rtos configs
+		"rtos_sysconfig": {
+			"vind/sensor0": {
+				"sensor0_reset": "port:PD14<1><0><1><0>"
+			}
+		}
+	}, // end of lcd nv3049f
+	/*****************************low_power_app************************************/
+	"low_power_app": {
+		"desc": "Open LOW POWER APP DEMO",
+		"rtos": [
+			"CONFIG_DRIVERS_PRCM=y",
+			"CONFIG_COMPONENTS_MQTTC=y",
+			"# CONFIG_COMPONENTS_PAHOMQTT is not set",
+			"CONFIG_COMPONENTS_COREMQTT_2_3_1=y",
+			"CONFIG_COMPONENTS_LOW_POWER_APP=y",
+			"# CONFIG_COMPONENTS_LOW_POWER_APP_TCP is not set",
+			"CONFIG_COMPONENTS_LOW_POWER_APP_MQTT=y"
+		],
+		"openwrt": [
+			"CONFIG_rt_media-mpp_demo_video_rtsp=y",
+			"CONFIG_rt_media-mpp_demo_video_webrtc=y",
+			"CONFIG_demo_video_webrtc_autostart=y",
+			"CONFIG_MBEDTLS_SSL_DTLS_SRTP=y"
+		]
+	}, //end of low_power_app
+	/*****************************rtos_ve_memmap*************************/
+	"rtos_ve_memmap": {
+		"desc": "Set new memmap for rtos running VE",
+		"depends": [
+			"disable_spif_rootfs_readahead",
+			"disable_spif_parallel_ramdisk"
+		],
+		"board.dts": {
+			"set_property": {
+				"rv_ddr_reserved": {
+					"reg": "<0x0 0x81000000 0x0 0x1000000>"
+				},
+				"rv_vdev0buffer": {
+					"reg": "<0x0 0x82000000 0x0 0x40000>"
+				},
+				"rv_vdev0vring0": {
+					"reg": "<0x0 0x82040000 0x0 0x2000>"
+				},
+				"rv_vdev0vring1": {
+					"reg": "<0x0 0x82042000 0x0 0x2000>"
+				},
+				"e907_mem_fw": {
+					"reg": "<0x0 0x82044000 0x0 0x00600000>"
+				},
+				"e907_share_irq_table": {
+					"reg": "<0x0 0x82644000 0x0 0x2000>"
+				},
+				"e907_rpbuf_reserved": {
+					"reg": "<0x0 0x82646000 0x0 0x60000>"
+				},
+				"isp_dram_reserved": {
+					"reg": "<0x0 0x826A6000 0x0 0x0065A000>"
+				},
+				"size_pool": {
+					"reg": "<0 0x83000000 0 0x100000>"
+				},
+				"heap_size_pool@0": {
+					"heap-base": "<0x83000000>",
+					"heap-size": "<0x100000>",
+					"sizes": "<0 1024>"
+				}
+			}
+		},
+		"boot0": {
+			"spinorfastboot.mk": {
+				"CFG_KERNEL_LOAD_ADDR": "0x83000000",
+				"CFG_SUNXI_FDT_ADDR": "0x80E00000",
+				"CFG_BOOT0_LOAD_ISPPARM": null,
+				"CFG_SUNXI_SIMPLEBOOT": null,
+				"CFG_BOOT0_RUN_ADDR": null,
+				"CFG_BOOT0_SIZE_LIMIT": null
+			}
+		},
+		"kernel": [
+			"# CONFIG_VIDEO_RT_MEDIA is not set",
+			"# AW_VIDEO_SUNXI_VIN is not set",
+			"# AW_VIDEO_KERNEL_ENC is not set",
+			"# CONFIG_AW_VIDEO_ENCODER_DECODER is not set"
+		],
+		"rtos": [
+			"CONFIG_ARCH_MEM_LENGTH=0x1000000",
+			"# CONFIG_DRIVERS_VIN is not set",
+			"# CONFIG_ISP_NUMBER is not set",
+			"# CONFIG_VIN_WAIT_AMP_INIT is not set",
+			"# CONFIG_VIN_CONTINUE_INIT_TRY_TIMES is not set",
+			"# CONFIG_VIN_WAIT_AMP_INIT_SEM_TIMEOUT is not set",
+			"# CONFIG_ISP_MEMRESERVE_ADDR is not set",
+			"# CONFIG_ISP_MEMRESERVE_LEN is not set",
+			"# CONFIG_VIN_USE_SYSCONFIG is not set",
+			"# CONFIG_VIN_USE_PM is not set"
+		]
+	} // rtos_ve_memmap
+}
