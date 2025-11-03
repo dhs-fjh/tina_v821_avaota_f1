@@ -188,7 +188,7 @@ tools/*
 .vscode/
 .idea/
 *.code-workspace
-
+.cache/
 # 保留 Claude Code 配置
 !.claude/
 
@@ -211,3 +211,4 @@ tools/*
 #    git add -f rtos/lichee/rtos/your_module/
 #
 ###############################################################################
+compile_commands.json

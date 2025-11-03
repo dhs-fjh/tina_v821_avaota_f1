@@ -1,0 +1,71 @@
+# clangd 配置文件 - Tina V821 SDK
+CompileFlags:
+  # 编译标志配置
+  Add:
+    # 添加通用内核宏定义
+    - -D__KERNEL__
+    - -DLINUX
+    - -D__linux__
+    # 兼容性设置
+    - -Wno-unknown-warning-option
+    - -Wno-unused-command-line-argument
+  Remove:
+    # 移除 clangd 不支持的 GCC 特有选项
+    - -mabi=*
+    - -march=*
+    - -mtune=*
+    - -fconserve-stack
+    - -fno-var-tracking-assignments
+    - -fno-delete-null-pointer-checks
+    - -mpreferred-stack-boundary=*
+    - --param=allow-store-data-races=*
+    - -mindirect-branch=*
+    - -mindirect-branch-register
+    - -fno-allow-store-data-races
+    - -fmacro-prefix-map=*
+    - -Wno-pointer-sign
+
+Index:
+  # 索引配置
+  Background: Build  # 后台索引模式
+  StandardLibrary: No  # 不索引标准库（嵌入式项目通常不需要）
+
+Diagnostics:
+  # 诊断配置
+  ClangTidy:
+    Add:
+      - readability-*
+      - bugprone-*
+    Remove:
+      - readability-magic-numbers
+      - readability-isolate-declaration
+  UnusedIncludes: Strict
+
+# 针对不同目录的特殊配置
+---
+If:
+  PathMatch: [kernel/.*\.c$, bsp/.*\.c$]
+CompileFlags:
+  Add:
+    # 内核特有的宏
+    - -D__KERNEL__
+    - -DKBUILD_MODNAME="unknown"
+    - -DMODULE
+  Compiler: gcc  # 内核代码使用 GCC 语义
+
+---
+If:
+  PathMatch: [rtos/.*\.c$]
+CompileFlags:
+  Add:
+    # RTOS 特有的宏
+    - -DCONFIG_ARCH_RISCV
+    - -D__riscv
+
+---
+If:
+  PathMatch: [openwrt/.*\.c$, platform/.*\.c$]
+CompileFlags:
+  Add:
+    # 用户态代码
+    - -D_GNU_SOURCE
